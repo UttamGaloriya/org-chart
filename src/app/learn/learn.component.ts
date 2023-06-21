@@ -127,7 +127,7 @@ export class LearnComponent implements OnInit {
     var root = d3.hierarchy(data)
 
     treeLayout(root)
-
+    console.log(root.descendants())
     d3.select('svg g.nodes')
       .selectAll('circle.node')
       .data(root.descendants())
@@ -139,7 +139,7 @@ export class LearnComponent implements OnInit {
       .append('text')
       .text("hello ");
 
-
+    console.log(root.links())
     d3.select('svg g.links')
       .selectAll('line.link')
       .data(root.links())
@@ -150,17 +150,20 @@ export class LearnComponent implements OnInit {
       .attr('x2', function (d: any) { return d.target.x; })
       .attr('y2', function (d: any) { return d.target.y; })
       ;
-    d3.select('svg g.nodes')
-      .selectAll('text.label')
-      .data(root.descendants())
-      .join('text')
-      .classed('label', true)
-      .attr('x', function (d: any) { return d.x; })
-      .attr('y', function (d: any) { return d.y - 10; })
-      .text(function (d: any) {
-        // console.log(d.data.name)
-        return d.data.name;
-      });
+    // d3.select('svg g.nodes')
+    //   .selectAll('text.label')
+    //   .data(root.descendants())
+    //   .join('text')
+    //   .classed('label', true)
+    //   .attr('x', function (d: any) { return d.x; })
+    //   .attr('y', function (d: any) { return d.y - 10; })
+    //   .text(function (d: any) {
+    //     // console.log(d.data.name)
+    //     return d.data.name;
+    //   });
+
+
+
   }
 
 }
