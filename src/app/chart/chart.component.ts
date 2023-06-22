@@ -32,7 +32,7 @@ export class ChartComponent implements OnInit {
 
 
   private createSvg(): void {
-    this.svg = d3.select("figure#bar")
+    this.svg = d3.select("#bar")
       .append("svg")
       .attr("width", this.width + (this.margin * 2))
       .attr("height", this.height + (this.margin * 2))

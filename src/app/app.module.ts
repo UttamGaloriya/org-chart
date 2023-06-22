@@ -8,6 +8,7 @@ import { ChartComponent } from './chart/chart.component';
 import { OrgComponent } from './org/org.component';
 import { LearnComponent } from './learn/learn.component';
 import { TreeComponent } from './tree/tree.component';
+import { Learn2Component } from './learn2/learn2.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TreeComponent } from './tree/tree.component';
     ChartComponent,
     OrgComponent,
     LearnComponent,
-    TreeComponent
+    TreeComponent,
+    Learn2Component
   ],
   imports: [
     BrowserModule,
