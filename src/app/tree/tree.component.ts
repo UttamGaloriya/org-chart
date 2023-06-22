@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
 import { treeData } from '../data';
+import { Router } from '@angular/router';
+import { chartData } from '../org.data';
 
 interface ChartData {
   name: string;
@@ -18,202 +20,10 @@ export class TreeComponent implements OnInit {
   @ViewChild('chartContainer', { static: true }) chartContainer: any
   private svg!: d3.Selection<SVGSVGElement, unknown, null, undefined>;
   private zoom!: d3.ZoomBehavior<Element, unknown>;
-  chartData: any = {
-    name: 'atul',
-    designation: 'CEO',
-    experience: 20,
-    department: "department",
-    children: [
-      {
-        name: 'amul', department: "department",
-        designation: 'Manager 1',
-        experience: 20,
-        children: [
-          {
-            name: 'amul', department: "department",
-            designation: 'Team Lead 1',
-            experience: 20,
-          },
-          {
-            name: 'amul', department: "department",
-            designation: 'Team Lead 2',
-            children: [
-              {
-                name: 'amul', department: "department",
-                designation: 'dev 1',
-                children: [
-                  {
-                    name: 'amul',
-                    department: "department",
-                    designation: 'dev 11'
-                  },
-                  {
-                    name: 'amul',
-                    department: "department",
-                    designation: 'dev 12',
-                    children: [
-                      {
-                        name: 'amul',
-                        department: "department",
-                        designation: 'dev 121'
-                      },
-                      {
-                        name: 'amul',
-                        department: "department",
-                        designation: 'dev 122'
-                      },
-                      {
-                        name: 'amul',
-                        department: "department",
-                        designation: 'dev 123'
-                      },
-                      {
-                        name: 'amul',
-                        department: "department",
-                        designation: 'dev 124'
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                name: 'amul',
-                department: "department",
-                designation: 'dev 2',
-                children: [
-                  {
-                    name: 'amul',
-                    department: "department",
-                    designation: 'dev 21',
-                    experience: 2,
+  chartData = chartData
 
-                  },
-                  {
-                    department: "department",
-                    name: 'amul',
-                    designation: 'dev 22'
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        name: 'amul',
-        department: "department",
-        designation: 'Manager 2',
-        children: [
-          {
-            name: 'amul', department: "department",
-            designation: 'Team Lead 3'
-          },
-          {
-            name: 'amul', department: "department",
-            designation: 'Team Lead 4'
-          }
-        ]
-      }
-    ]
-  };
-  chartDatax: any = {
-    name: 'atulfdgd',
-    designation: 'CEO',
-    experience: 20,
-    children: [
-      {
-        name: 'amfufvgdfgl',
-        designation: 'Manfhjgjager 1',
-        experience: 20,
-        children: [
-          {
-            name: 'amul',
-            designation: 'Team Lead 1',
-            experience: 20,
-          },
-          {
-            name: 'amdsul',
-            designation: 'Team ghkjhkhjlkjLead 2',
-            children: [
-              {
-                name: 'amsul',
-                designation: 'dgkhjkv 1',
-                children: [
-                  {
-                    name: 'amul',
 
-                    designation: 'dev 11'
-                  },
-                  {
-                    name: 'amsgful',
-
-                    designation: 'devfghgfj 12',
-                    children: [
-                      {
-                        name: 'amul',
-
-                        designation: 'dev 121'
-                      },
-                      {
-                        name: 'amul',
-
-                        designation: 'dev 122'
-                      },
-                      {
-                        name: 'amul',
-
-                        designation: 'dev 123'
-                      },
-                      {
-                        name: 'amfgjhfgjudfgl',
-
-                        designation: 'dev 1gkghk24'
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                name: 'amul',
-
-                designation: 'dev 2',
-                children: [
-                  {
-                    name: 'amul',
-
-                    designation: 'dev 21',
-                    experience: 2,
-
-                  },
-                  {
-                    name: 'amul',
-                    designation: 'dev 22'
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        name: 'amul',
-
-        designation: 'Manager 2',
-        children: [
-          {
-            name: 'amul',
-            designation: 'Team Lead 3'
-          },
-          {
-            name: 'amul',
-            designation: 'Team Lead 4'
-          }
-        ]
-      }
-    ]
-  };
-
-  constructor() { }
+  constructor(private route: Router) { }
   ngOnInit(): void {
     const container = this.chartContainer?.nativeElement;
     //function make
@@ -223,9 +33,19 @@ export class TreeComponent implements OnInit {
       } else {
         d.children = d.data.children; // Expand the sub-branch
       }
-      this.chartData = this.chartDatax
+      this.chartData
       console.log("hi")
     }
+
+
+
+    const viewPage = (event: any, d: any) => {
+      this.route.navigate(['/view', d.data.id])
+      console.log(d.data.id)
+    }
+
+
+
 
 
     function mydata(data: any) {
@@ -278,6 +98,7 @@ export class TreeComponent implements OnInit {
           .enter()
           .append('g')
           .attr('class', 'node')
+          .on('click', viewPage)
           .attr('transform', d => `translate(${d.y},${d.x})`);
 
 
@@ -286,7 +107,8 @@ export class TreeComponent implements OnInit {
           .attr('height', 70)
           .attr('x', -90)
           .attr('y', -25)
-          .classed('custom-node', true).transition();
+          .classed('custom-node', true)
+          .transition();
 
         node.append('text')
           .attr('dy', '0.15em') // Adjust the vertical alignment of the text
