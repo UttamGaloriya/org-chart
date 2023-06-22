@@ -57,7 +57,8 @@ export class TreeComponent implements OnInit {
         const svg = d3.select(container)
           .append('svg')
           .attr('width', '100%')
-          .attr('height', '100%');
+          .attr('height', '100%')
+          ;
 
         // Set the width and height of the chart
         const width = container.offsetWidth - 500;
@@ -105,34 +106,34 @@ export class TreeComponent implements OnInit {
         node.append('rect')
           .attr('width', 200)
           .attr('height', 70)
-          .attr('x', -90)
-          .attr('y', -25)
+          .attr('x', 0)
+          .attr('y', -35)
           .classed('custom-node', true)
           .transition();
 
         node.append('text')
           .attr('dy', '0.15em') // Adjust the vertical alignment of the text
-          .attr('text-anchor', 'middle')
+          .attr('text-anchor', 'start')
           .classed('custom-text', true) // Center the text horizontally
           .text(d => "Name  " + d.data.name); // Use the data property to set the text content
 
         node.append('text')
           .attr('dy', '1.1em') // Adjust the vertical alignment of the text
-          .attr('text-anchor', 'middle')
+          .attr('text-anchor', 'start')
           .classed('custom-text', true)// Center the text horizontally
           .text(d => "Designation  " + d.data.designation); // Use the data property to set the text content
 
         node.append('text')
           .attr('dy', '2.1em') // Adjust the vertical alignment of the text
-          .attr('text-anchor', 'middle')
+          .attr('text-anchor', 'start')
           .classed('custom-text', true) // Center the text horizontally
           .text(d => "Department  " + d.data.department); // Use the data property to set the text content
         ;
         node.filter((d: any) => d.children)
           .append('circle')
           .attr('r', 10)
-          .attr('cx', 105)
-          .attr('cy', 10)
+          .attr('cx', 200)
+          .attr('cy', 0)
           .on('click', onclick)
 
       }
