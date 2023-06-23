@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
 import { chartData } from '../org.data';
+import { Router } from '@angular/router';
 interface HierarchyDatum {
   name: string;
   value: number;
@@ -100,7 +101,7 @@ export class Learn2Component implements OnInit {
 
   height: number | undefined;
   width: number | undefined;
-  margin: any = { top: 200, bottom: 150, left: 250, right: 150 };
+  margin: any = { top: 500, bottom: 150, left: 200, right: 150 };
   duration: number = 750;
   nodeWidth: number = 20;
   nodeHeight: number = 20;
@@ -119,21 +120,34 @@ export class Learn2Component implements OnInit {
   previousClickedDomNode: any;
   links: any;
 
-  constructor() { }
+  constructor(private route: Router) { }
 
   ngOnInit() {
     this.renderTreeChart();
   }
 
   renderTreeChart() {
+    let zoom = d3.zoom()
+      .on('zoom', handleZoom);
+
+    function handleZoom(e: any) {
+      d3.select('svg g').attr('transform', e.transform)
+    }
+
+    function initZoom() {
+      d3.select('svg g')
+        .call(zoom as any)
+    }
 
     let element: any = this.chartContainer.nativeElement;
-    this.width = element.offsetWidth - this.margin.left - this.margin.right;
-    this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
+    this.width = 100;
+    this.height = 100;
+    // this.width = element.offsetWidth - this.margin.left - this.margin.right;
+    // this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
 
     this.svg = d3.select(element).append('svg')
       .attr('width', element.offsetWidth)
-      .attr('height', element.offsetHeight)
+      .attr('height', element.offsetHeight + element.offsetHeight)
       .append("g")
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
@@ -161,6 +175,7 @@ export class Learn2Component implements OnInit {
     //   }
     // }
 
+    initZoom()
   }
 
   click = (e: any, d: any) => {
@@ -176,6 +191,11 @@ export class Learn2Component implements OnInit {
   }
 
   updateChart(source: any) {
+    const viewPage = (event: any, d: any) => {
+      this.route.navigate(['/view', d.data.id])
+      console.log(d.data.id)
+    }
+
     let i = 0;
     console.log(source);
     this.treeData = this.tree(this.root);
@@ -191,31 +211,70 @@ export class Learn2Component implements OnInit {
       .attr('transform', (d: any) => {
         return 'translate(' + source.y0 + ',' + source.x0 + ')';
       })
-      .on('click', this.click);
+      ;
+
 
     nodeEnter.append('rect')
       .attr('height', 100)
       .attr('width', 150)
       .attr('x', -150)
-      .attr('y', -50);
+      .attr('y', -50)
+      .on('click', viewPage);
 
-    nodeEnter.append('circle')
+    nodeEnter.filter((d: any) => d.children)
+      .append('circle')
       .attr('class', 'node')
       .attr('r', 1e-6)
       .style('fill', (d: any) => {
-        return d._children ? 'lightsteelblue' : '#fff';
-      });
+        return d._children ? '#000' : 'rgb(213 196 219)';
+      }).on('click', this.click)
+      ;
+
+
+
+    nodeEnter.filter((d: any) => d.children)
+      .append('text')
+      .attr('dx', -4)
+      .attr('dy', 6)
+      .style('fill', '#000')
+      .text('+');
+
+
 
     nodeEnter.append('text')
-      .attr('dy', '.35em')
-      .attr('x', (d: any) => {
-        return d.children || d._children ? -13 : 13;
-      })
-      .attr('text-anchor', (d: any) => {
-        return d.children || d._children ? 'end' : 'start';
-      })
-      .style('font', '12px sans-serif')
-      .text((d: any) => { return d.data.name; });
+      .attr('dx', -120)
+      .attr('dy', -18)
+      .style('color', 'red')
+      .text((d: any) => { return d.data.name })
+      .on('click', viewPage);
+
+    nodeEnter.append('text')
+      .attr('dx', -120)
+      .attr('dy', 0)
+      .style('color', 'red')
+      .text((d: any) => { return d.data.department })
+      .on('click', viewPage);
+
+    nodeEnter.append('text')
+      .attr('dx', -120)
+      .attr('dy', 18)
+      .style('color', 'red')
+      .text((d: any) => { return d.data.designation })
+      .on('click', viewPage);
+
+
+
+
+    // nodeEnter.append('text')
+    //   .attr('dy', '.35em')
+    //   .attr('x', (d: any) => {
+    //     return d.children || d._children ? -13 : 13;
+    //   })
+    //   .attr('text-anchor', (d: any) => {
+    //     return d.children || d._children ? 'end' : 'start';
+    //   })
+    //   .style('font', '12px sans-serif')
+    //   .text((d: any) => { return d.data.id; });
 
     let nodeUpdate = nodeEnter.merge(node);
 

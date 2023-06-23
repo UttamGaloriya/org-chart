@@ -65,7 +65,8 @@ export class TreeComponent implements OnInit {
         const height = container.offsetHeight;
 
         // Define the tree layout
-        const treeLayout = d3.tree<ChartData>().size([height, width]);
+        // const treeLayout = d3.tree<ChartData>().size([height, width]);
+        const treeLayout = d3.tree<ChartData>()
 
         // Create the hierarchy from the chart data
         const nodes = d3.hierarchy(data);

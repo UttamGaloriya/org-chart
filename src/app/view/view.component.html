@@ -1,10 +1,28 @@
-<p>view works!</p>
-<div *ngIf="node">
-    <h1>Name :<span>{{node.name}}</span></h1>
-    <h1>Department:{{node.department}}</h1>
-    <h1>Designation:{{node.designation}}</h1>
-    <h1>Children:{{node.children?.length}}</h1>
+<div *ngIf="node" class="user-view">
 
 
-
+    <mat-card class="user-container">
+        <mat-card-header>
+            <mat-card-title>User Profile</mat-card-title>
+        </mat-card-header>
+        <div class="user-details">
+            <span>Name</span>
+            <span>{{node.name}}</span>
+        </div>
+        <div class="user-details">
+            <span>Department</span>
+            <span>{{node.department}}</span>
+        </div>
+        <div class="user-details">
+            <span>Designation</span>
+            <span>{{node.designation}}</span>
+        </div>
+        <div class="user-details">
+            <span>Sub</span>
+            <span>{{node.children?.length}}</span>
+        </div>
+        <mat-card-actions align="start">
+            <button routerLink="/home"><mat-icon>arrow_back</mat-icon></button>
+        </mat-card-actions>
+    </mat-card>
 </div>

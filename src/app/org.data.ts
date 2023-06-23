@@ -47,7 +47,33 @@ export const chartData: any = {
                                             id: 8,
                                             name: 'amul',
                                             department: "department",
-                                            designation: 'dev 121'
+                                            designation: 'dev 121',
+                                            children: [
+                                                {
+                                                    id: 81,
+                                                    name: 'amul',
+                                                    department: "department",
+                                                    designation: 'dev 121'
+                                                },
+                                                {
+                                                    id: 91,
+                                                    name: 'amul',
+                                                    department: "department",
+                                                    designation: 'dev 122'
+                                                },
+                                                {
+                                                    id: 101,
+                                                    name: 'amul',
+                                                    department: "department",
+                                                    designation: 'dev 123'
+                                                },
+                                                {
+                                                    id: 111,
+                                                    name: 'amul',
+                                                    department: "department",
+                                                    designation: 'dev 124'
+                                                }
+                                            ]
                                         },
                                         {
                                             id: 9,
@@ -73,7 +99,7 @@ export const chartData: any = {
                         },
                         {
                             id: 12,
-                            name: 'amul',
+                            name: 'avvvmul',
                             department: "department",
                             designation: 'dev 2',
                             children: [

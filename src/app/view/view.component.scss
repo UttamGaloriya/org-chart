@@ -1,0 +1,17 @@
+.user-view{
+    width: 100%;
+    padding:100px 10px;
+}
+.user-container{
+
+    max-width: 900px;
+    margin: auto;
+}
+.mat-card{
+    background-color: #414141;
+    color: #fff;
+}
+.mat-card-header {justify-content: center;margin-bottom: 30px;}
+.mat-card-header .mat-card-title{font-size: 36px;}
+.user-details{display: flex;justify-content: flex-start;font-size: 26px;}
+.user-details span{width: 50%;padding: 10px;}
