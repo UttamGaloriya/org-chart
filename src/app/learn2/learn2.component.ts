@@ -102,9 +102,9 @@ export class Learn2Component implements OnInit {
   width: number | undefined;
   margin: any = { top: 200, bottom: 150, left: 250, right: 150 };
   duration: number = 750;
-  nodeWidth: number = 5;
-  nodeHeight: number = 5;
-  nodeRadius: number = 5;
+  nodeWidth: number = 20;
+  nodeHeight: number = 20;
+  nodeRadius: number = 20;
   horizontalSeparationBetweenNodes: number = 5;
   verticalSeparationBetweenNodes: number = 5;
   nodeTextDistanceY: string = "-5px";
@@ -192,11 +192,12 @@ export class Learn2Component implements OnInit {
         return 'translate(' + source.y0 + ',' + source.x0 + ')';
       })
       .on('click', this.click);
-    // nodeEnter.append('rect')
-    //   .attr('height', 100)
-    //   .attr('width', 150)
-    //   .attr('x', -150)
-    //   .attr('y', -50);
+
+    nodeEnter.append('rect')
+      .attr('height', 100)
+      .attr('width', 150)
+      .attr('x', -150)
+      .attr('y', -50);
 
     nodeEnter.append('circle')
       .attr('class', 'node')

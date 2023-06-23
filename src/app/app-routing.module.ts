@@ -5,7 +5,7 @@ import { ViewComponent } from './view/view.component';
 import { Learn2Component } from './learn2/learn2.component';
 
 const routes: Routes = [
-  { path: 'home', component: TreeComponent },
+  { path: 'home', component: Learn2Component },
   { path: 'view/:id', component: ViewComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
