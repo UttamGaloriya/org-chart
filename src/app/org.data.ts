@@ -1,9 +1,9 @@
 export const chartData: any = {
     id: 1,
-    name: 'atul',
-    designation: 'CEO',
+    name: 'atulllllllllllllllllllllllllllllllllllllll',
+    designation: 'CEOoooooooooooooooooooooooooo',
     experience: 20,
-    department: "department",
+    department: "departmenttttttttttttttttttttttttttttt",
     children: [
         {
             id: 2,
@@ -53,7 +53,58 @@ export const chartData: any = {
                                                     id: 81,
                                                     name: 'amul',
                                                     department: "department",
-                                                    designation: 'dev 121'
+                                                    designation: 'dev 121',
+                                                    children: [
+                                                        {
+                                                            id: 801,
+                                                            name: 'amul',
+                                                            department: "department",
+                                                            designation: 'dev 121', children: [
+                                                                {
+                                                                    id: 81,
+                                                                    name: 'amul',
+                                                                    department: "department",
+                                                                    designation: 'dev 121'
+                                                                },
+                                                                {
+                                                                    id: 91,
+                                                                    name: 'amul',
+                                                                    department: "department",
+                                                                    designation: 'dev 122'
+                                                                },
+                                                                {
+                                                                    id: 101,
+                                                                    name: 'amul',
+                                                                    department: "department",
+                                                                    designation: 'dev 123'
+                                                                },
+                                                                {
+                                                                    id: 111,
+                                                                    name: 'amul',
+                                                                    department: "department",
+                                                                    designation: 'dev 124'
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            id: 901,
+                                                            name: 'amul',
+                                                            department: "department",
+                                                            designation: 'dev 122'
+                                                        },
+                                                        {
+                                                            id: 1001,
+                                                            name: 'amul',
+                                                            department: "department",
+                                                            designation: 'dev 123'
+                                                        },
+                                                        {
+                                                            id: 1101,
+                                                            name: 'amul',
+                                                            department: "department",
+                                                            designation: 'dev 124'
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     id: 91,

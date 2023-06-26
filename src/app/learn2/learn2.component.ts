@@ -101,7 +101,7 @@ export class Learn2Component implements OnInit {
 
   height: number | undefined;
   width: number | undefined;
-  margin: any = { top: 500, bottom: 150, left: 200, right: 150 };
+  margin: any = { top: 700, bottom: 150, left: 200, right: 150 };
   duration: number = 750;
   nodeWidth: number = 20;
   nodeHeight: number = 20;
@@ -135,21 +135,21 @@ export class Learn2Component implements OnInit {
     }
 
     function initZoom() {
-      d3.select('svg g')
+      d3.select('svg')
         .call(zoom as any)
     }
 
     let element: any = this.chartContainer.nativeElement;
-    this.width = 100;
-    this.height = 100;
-    // this.width = element.offsetWidth - this.margin.left - this.margin.right;
-    // this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
+    // this.width = 100;
+    // this.height = 100;
+    this.width = element.offsetWidth - this.margin.left;
+    this.height = element.offsetHeight - this.margin.top;
 
     this.svg = d3.select(element).append('svg')
-      .attr('width', element.offsetWidth)
-      .attr('height', element.offsetHeight + element.offsetHeight)
+      .attr('height', "100%")
+      .attr('width', "100%")
       .append("g")
-      .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
+      .attr('transform', 'translate(' + this.margin.left + ',' + (this.height / 2) + ')');
 
     // declares a tree layout and assigns the size
     this.tree = d3.tree()
@@ -162,18 +162,7 @@ export class Learn2Component implements OnInit {
     this.root.x0 = this.height / 2;
     this.root.y0 = 10;
 
-    // Collapse after the second level
-    //this.root.children.forEach(collapse);
-
     this.updateChart(this.root);
-
-    // function collapse(d:any) {
-    //   if (d.children) {
-    //       d._children = d.children;
-    //       d._children.forEach(collapse);
-    //       d.children = null;
-    //   }
-    // }
 
     initZoom()
   }
@@ -245,21 +234,36 @@ export class Learn2Component implements OnInit {
       .attr('dx', -120)
       .attr('dy', -18)
       .style('color', 'red')
-      .text((d: any) => { return d.data.name })
+      .text((d: any) => {
+        const name: string = d.data.name
+        if (name.length <= 10) { return name }
+        else
+          return d.data.name.slice(0, 10) + '...'
+      })
       .on('click', viewPage);
 
     nodeEnter.append('text')
       .attr('dx', -120)
       .attr('dy', 0)
       .style('color', 'red')
-      .text((d: any) => { return d.data.department })
+      .text((d: any) => {
+        const department: string = d.data.department
+        if (department.length <= 10) { return department }
+        else
+          return d.data.department.slice(0, 10) + '...'
+      })
       .on('click', viewPage);
 
     nodeEnter.append('text')
       .attr('dx', -120)
       .attr('dy', 18)
       .style('color', 'red')
-      .text((d: any) => { return d.data.designation })
+      .text((d: any) => {
+        const designation: string = d.data.designation
+        if (designation.length <= 10) { return designation }
+        else
+          return d.data.designation.slice(0, 10) + '...'
+      })
       .on('click', viewPage);
 
 
